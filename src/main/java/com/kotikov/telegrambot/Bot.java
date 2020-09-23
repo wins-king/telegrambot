@@ -5,13 +5,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-@Component
 public class Bot extends TelegramLongPollingBot {
-
-    @Value("${telegrambot.token}")
-    private String token;
-    @Value("${telegrambot.name}")
-    private String botname;
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -20,11 +14,11 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return this.botname;
+        return "KotikovEvgenTelegramBot";
     }
 
     @Override
     public String getBotToken() {
-        return this.token;
+        return "1337804692:AAGLyrUobRx7T1sqwiOqeFEdm8W61bqK2rI";
     }
 }
