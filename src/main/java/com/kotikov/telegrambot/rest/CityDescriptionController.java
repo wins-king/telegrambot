@@ -1,7 +1,8 @@
 package com.kotikov.telegrambot.rest;
 
 import com.kotikov.telegrambot.model.City;
-import com.kotikov.telegrambot.service.CityService;
+import com.kotikov.telegrambot.model.CityDescription;
+import com.kotikov.telegrambot.service.CityDescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,57 +13,57 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/city/")
-public class CityController {
+@RequestMapping(value = "/api/v1/cityDescription/")
+public class CityDescriptionController {
 
     @Autowired
-    private CityService cityService;
+    private CityDescriptionService cityDescriptionService;
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<City> getCity(@PathVariable("id") Long id ){
+    public ResponseEntity<CityDescription> getCityDescription(@PathVariable("id") Long id ){
         if(id==null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        City city = cityService.getById(id);
-        if(city==null){
+        CityDescription cityDescription = cityDescriptionService.getById(id);
+        if(cityDescription==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(city,HttpStatus.OK);
+        return new ResponseEntity<>(cityDescription,HttpStatus.OK);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<City> deleteCity(@PathVariable("id") Long id ){
+    public ResponseEntity<CityDescription> deleteCityDescription(@PathVariable("id") Long id ){
         if(id==null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        cityService.delete(id);
+        cityDescriptionService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value="",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<City> saveCity(@RequestBody @Valid City city){
-        if(city==null){
+    public ResponseEntity<CityDescription> saveCityDescription(@RequestBody @Valid CityDescription cityDescription){
+        if(cityDescription==null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        cityService.save(city);
-        return new ResponseEntity<>(city,HttpStatus.OK);
+        cityDescriptionService.save(cityDescription);
+        return new ResponseEntity<>(cityDescription,HttpStatus.OK);
     }
 
     @RequestMapping(value="",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<City> updateCity(@RequestBody @Valid City city){
-        if(city==null){
+    public ResponseEntity<CityDescription> updateCityDescription(@RequestBody @Valid CityDescription cityDescription){
+        if(cityDescription==null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        cityService.save(city);
-        return new ResponseEntity<>(city,HttpStatus.OK);
+        cityDescriptionService.save(cityDescription);
+        return new ResponseEntity<>(cityDescription,HttpStatus.OK);
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<City>> getAllCities(){
-        List<City> cityList =  cityService.getAll();
-        if(cityList.isEmpty()){
+    public ResponseEntity<List<CityDescription>> getAllDescriptions(){
+        List<CityDescription> cityDescriptionListList =  cityDescriptionService.getAll();
+        if(cityDescriptionListList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(cityList, HttpStatus.OK);
+        return new ResponseEntity<>(cityDescriptionListList, HttpStatus.OK);
     }
 }

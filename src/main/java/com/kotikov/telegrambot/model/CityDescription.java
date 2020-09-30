@@ -1,14 +1,16 @@
 package com.kotikov.telegrambot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="Telegrambot_City_Description")
-@Getter
-@Setter
+@Data
 public class CityDescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +21,6 @@ public class CityDescription {
 
     @ManyToOne
     @JoinColumn(name="city_id",nullable = false)
+    @ToString.Exclude @JsonIgnore
     private City city;
 }

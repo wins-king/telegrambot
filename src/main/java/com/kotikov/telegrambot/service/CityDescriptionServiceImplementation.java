@@ -2,11 +2,14 @@ package com.kotikov.telegrambot.service;
 
 import com.kotikov.telegrambot.model.CityDescription;
 import com.kotikov.telegrambot.repository.CityDescriptionRepository;
-import org.jvnet.hk2.annotations.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CityDescriptionServiceImplementation implements CityDescriptionService {
+
     @Autowired
     private CityDescriptionRepository cityDescriptionRepository;
 
@@ -24,5 +27,10 @@ public class CityDescriptionServiceImplementation implements CityDescriptionServ
     @Deprecated
     public void save(CityDescription cityDescription) {
         cityDescriptionRepository.save(cityDescription);
+    }
+
+    @Override
+    public List<CityDescription> getAll() {
+        return cityDescriptionRepository.findAll();
     }
 }
