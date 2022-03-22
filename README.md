@@ -1,4 +1,4 @@
-REST application
+REST application 
 For run application you have to go to file TelegramBotApplication.java and run main method
 
 see all application properties in file application.properties
